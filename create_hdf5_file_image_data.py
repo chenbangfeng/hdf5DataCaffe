@@ -4,7 +4,7 @@ import cv2
 import numpy as np
 
 SIZE = 224
-NB_LABELS = 100
+NB_LABELS = 490
 
 MEANB = 104  # same order as in prototxt file
 MEANG = 117  # cv2 reads channels BLUE - GREEN - RED
@@ -29,16 +29,17 @@ if __name__ == '__main__':
     args = parser.parse_args()
     with open(args.labels_path) as f:
         lines = [line.rstrip().split(' ') for line in f]
-    data = np.zeros((2 * len(lines), 3, SIZE, SIZE), dtype='f4')  # multiply by 2 for flipped images
-    label = np.zeros((2 * len(lines), NB_LABELS), dtype='f4')
+    im_data = np.zeros((2 * len(lines), 3, SIZE, SIZE), dtype='f4')  # multiply by 2 for flipped images
+    label_data = np.zeros((2 * len(lines), NB_LABELS), dtype='f4')
     nb_data = len(lines)
     for i, line in enumerate(lines):
         impath, labels = line[0], line[1:]
         img = cv2.imread(impath).astype(np.float32)
-        data[i] = get_hdf5_image_data(img, SIZE, MEANB, MEANG, MEANR)
-        data[nb_data + i] = get_hdf5_image_data(cv2.flip(img, 1), SIZE, MEANB, MEANG, MEANR)   # add flip
-        label[i] = [int(x) for x in labels]
-        label[nb_data + i] = [int(x) for x in labels]
+        im_data[i] = get_hdf5_image_data(img, SIZE, MEANB, MEANG, MEANR)
+        im_data[nb_data + i] = get_hdf5_image_data(cv2.flip(img, 1), SIZE, MEANB, MEANG, MEANR)   # add flip
+        lab = [float(x) for x in labels]
+        label_data[i] = lab
+        label_data[nb_data + i] = lab
     with h5py.File(args.labels_path + '.h5', 'w') as H:
-        H.create_dataset('data', data=data)
-        H.create_dataset('label', data=label)
+        H.create_dataset('data', data=im_data)
+        H.create_dataset('label', data=label_data)
