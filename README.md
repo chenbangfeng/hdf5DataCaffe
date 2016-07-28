@@ -8,7 +8,7 @@ python create_hdf5_image_data.py train.labels
 
 train.labels contains images paths and corresponding labels, for instance :
 
-path/to/images/im1.jpg 0 0 1 
+path/to/images/im1.jpg 0 0 1 0 1 0
 
 New shape, means and number of labels should be specified in ```create_hdf5_image_data.py```
 
