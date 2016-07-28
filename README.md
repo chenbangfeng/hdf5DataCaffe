@@ -17,7 +17,7 @@ If you have to many images to process, the script ```hdf5.sh``` splits you train
 Usage :
 
 ```
-./hdf5.sh train.labels
+./hdf5_image.sh train.labels
 ```
 
 The maximum number of images to process per HDF5 file should be precised in hdf5.sh (currently 500)
