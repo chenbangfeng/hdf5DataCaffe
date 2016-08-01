@@ -34,7 +34,7 @@ python create_hdf5_float_data.py train.labels
 The train.labels must contain input float vectors and corresponding labels in the same linete   :
 
 VGG features           labels <br />
--------------------|------------  <br />
+---------------------|------------  <br />
 
 0.2 0.4 0.9 0.5 0.1 0 0 1 0 1 <br />
 0.3 0.5 0.2 0.3 0.8 1 1 0 1 1 <br />
