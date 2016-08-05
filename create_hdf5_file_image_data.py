@@ -4,7 +4,7 @@ import cv2
 import numpy as np
 
 SIZE = 224
-NB_LABELS = 490
+NB_LABELS = 100
 
 MEANB = 104  # same order as in prototxt file
 MEANG = 117  # cv2 reads channels BLUE - GREEN - RED

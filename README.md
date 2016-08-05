@@ -6,12 +6,18 @@
 Simply run :
 
 ```
-python create_hdf5_image_data.py train.labels
+python create_hdf5_image_data.py train.labels.shuffled
 ```
 
 train.labels contains images paths and corresponding labels, for instance :
 
 path/to/images/im1.jpg 0 0 1 0 1 0
+
+Don't forget to shuffle your data before creating hdf5 files: 
+
+```
+shuf train.labels > train.labels.shuffled
+```
 
 New shape, means and number of labels should be specified in ```create_hdf5_image_data.py```
 
@@ -20,7 +26,7 @@ If you have to many images to process, the script ```hdf5.sh``` splits you train
 Usage :
 
 ```
-./hdf5_image.sh train.labels
+./hdf5_image.sh train.labels.shuffled
 ```
 
 The maximum number of images to process per HDF5 file should be precised in hdf5.sh (currently 500)
@@ -28,10 +34,10 @@ The maximum number of images to process per HDF5 file should be precised in hdf5
 ### Float Data:
 
 ```
-python create_hdf5_float_data.py train.labels
+python create_hdf5_float_data.py train.labels.shuffled
 ```
 
-The train.labels must contain input float vectors and corresponding labels in the same linete   :
+The train.labels must contain input float vectors and corresponding labels in the same line:
 
 VGG features           labels <br />
 ---------------------|------------  <br />
